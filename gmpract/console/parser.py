@@ -3,6 +3,7 @@ import argparse
 def get_parser():
 	parser = argparse.ArgumentParser(description="""test accuracy of MNIST  
 	classifiers with variable inputs.""")
+	svm.set_defaults(which=None)
 
 	#verbose mode
 	parser.add_argument('-v',
@@ -12,6 +13,20 @@ def get_parser():
 	action = 'store_true',
 	dest = 'verbose',
 	help = 'Allow all modules to print to stdout')
+
+	#verbose mode
+	parser.add_argument('-d',
+	'--datasize',
+	required = False,
+	type = float,
+	default = 1,
+	action = 'store',
+	dest = 'data_size_scale',
+	help = 'Number between 0-1 referring the the percent of the MNIST database to train on.')
+
+	#add a subparser for each model supported
+	subparsers = parser.add_subparsers(help='Classififer Model')
+	add_svm_subparser(subparsers)
 
 	return parser
 

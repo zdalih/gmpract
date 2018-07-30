@@ -5,6 +5,7 @@
 
 #copy executable script to bin
 chmod +x ./gmpract.sh
+rm /bin/gmpract.sh
 cp ./gmpract.sh /bin/
 #create alias
 alias gmpract='sudo /bin/gmpract.sh'

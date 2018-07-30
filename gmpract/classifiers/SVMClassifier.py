@@ -1,7 +1,7 @@
 import numpy as np
 
 from sklearn.svm import SVC
-
+from sklearn import metrics
 
 class SVMClassifier():
 
@@ -40,7 +40,7 @@ class SVMClassifier():
 			C = kwargs.get('loss_constant'),
 			random_state = kwargs.get('rand_seed_param'),
 			gamma = kwargs.get('gamma','auto'),
-			verbose = 3
+			verbose = kwargs.get('verbose',False)
 			)
 
 	'''
@@ -52,3 +52,8 @@ class SVMClassifier():
 	'''
 	def train(self):
 		self.classifier.fit(self.dataset.trainDataX(), self.dataset.trainDataY())
+
+	def accuracy(self):
+		predictions = self.classifier.predict(self.dataset.testDataX())
+		accuracy = metrics.accuracy_score(self.dataset.testDataY(), predictions)
+		return accuracy
