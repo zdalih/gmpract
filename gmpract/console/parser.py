@@ -34,8 +34,11 @@ def get_args():
 	#option: make gamma a class type
 	#so that argparse understands that it's
 	#default is a string and otherwise it's a float
-	if args.gamma == None:
-		args.gamma = 'auto'
+	try:
+		if args.gamma == None:
+			args.gamma = 'auto'
+	except AttributeError:
+		pass
 
 	return args
 
