@@ -1,7 +1,8 @@
 #!/bin/bash
 
-#pull the image
-#docker pull gmpract
+
+#pull the docker image
+docker pull zdalihach/gmpract:gmpract-alpha
 
 #copy executable script to bin
 chmod +x ./gmpract.sh
