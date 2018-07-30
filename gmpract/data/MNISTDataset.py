@@ -18,20 +18,18 @@ class MNISTDataset(Dataset):
 	the following mnist import is credited to:
 	Alexandre Drouin
 
-	@param num_datapoints between 0 and 1
+	@param num_datapoints between 0.01 and 1
 		1 being all data points.
-		and 0 being none.
+		and 0.01 being 1% of the dataset. 
+
 
 	'''
 	def __init__(self, size_scale = 1):
-		#Stop tensorflow from printing
-		# - overwrite it's Print function
-		def _overwrite_print(**kwards):
-			pass
-		tf.Print = _overwrite_print
 		#silence warnings
 		tf.logging.set_verbosity(tf.logging.ERROR)
 
+		#Stop tensorflow from printing
+		#by temporarly changing stdout to None
 		old_stdout = sys.stdout
 		sys.stdout = None
 
@@ -49,16 +47,17 @@ class MNISTDataset(Dataset):
 		trainSize = int(len(x_train)*size_scale)
 		testSize = int(len(x_test)*size_scale)
 
-		x_train = x_train[0:trainSize-1]
-		y_train = y_train[0:trainSize-1]
+		x_train = x_train[0:trainSize]
+		y_train = y_train[0:trainSize]
 
-		x_test = x_test[0:testSize-1]
-		y_test = y_test[0:testSize-1]
+		#no need to change test length, because
+		#it is snot computationally expensive, and it gives bad
+		#accuracy readings if it changes every run	
+		# x_test = x_test[0:testSize]
+		# y_test = y_test[0:testSize]
 
 
 		Dataset.__init__(self, x_train, y_train, x_test, y_test)
 
 		del mnist
-		import shutil
-		shutil.rmtree(data_dir)
 		sys.stdout = old_stdout

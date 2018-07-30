@@ -3,7 +3,6 @@ import argparse
 def get_parser():
 	parser = argparse.ArgumentParser(description="""test accuracy of MNIST  
 	classifiers with variable inputs.""")
-	svm.set_defaults(which=None)
 
 	#verbose mode
 	parser.add_argument('-v',
@@ -19,10 +18,11 @@ def get_parser():
 	'--datasize',
 	required = False,
 	type = float,
+	choices = [Range(0.001,1.0)],
 	default = 1,
 	action = 'store',
 	dest = 'data_size_scale',
-	help = 'Number between 0-1 referring the the percent of the MNIST database to train on.')
+	help = 'Number between 0.001-1.0 referring the the percent of the MNIST database to train on.')
 
 	#add a subparser for each model supported
 	subparsers = parser.add_subparsers(help='Classififer Model')
@@ -61,3 +61,20 @@ def add_svm_subparser(subparsers):
 		action = 'store',
 		dest = 'rand_seed_param',
 		help = 'Set the random seed parameter')
+
+
+'''
+Range class that can be passed in argparser
+to specify the allowable range for float type 
+'''
+class Range:
+	def __init__(self, start, end):
+		self.start = start
+		self.end = end
+
+	def __eq__(self, other):
+		return self.start <= other <= self.end
+
+	def __repr__(self):
+		return ( 'Float Range : [%0.3f - %0.3f]' % (self.start, self.end) )
+
