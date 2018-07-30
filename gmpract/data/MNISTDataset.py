@@ -20,7 +20,17 @@ class MNISTDataset(Dataset):
 
 	@param num_datapoints between 0.01 and 1
 		1 being all data points.
-		and 0.01 being 1% of the dataset. 
+		and 0.01 being 1% of the dataset.
+
+		allows to choose a portion of the
+		training dataset available for training
+		- useful to run tests without having
+		to wait extended periods of time for training. 
+
+
+	Disables stdout while initializing the object
+	so if you have multiple threads trying to print
+	to sys.__stdout__ it will cause issues
 
 
 	'''
@@ -43,18 +53,12 @@ class MNISTDataset(Dataset):
 		x_test = np.vstack([img.reshape(-1,) for img in mnist.test.images])
 		y_test = mnist.test.labels
 
-		#scale the size of the dataset this is mostly for easy testing
+		#scale the size of the training set using size_scale
 		trainSize = int(len(x_train)*size_scale)
 		testSize = int(len(x_test)*size_scale)
 
 		x_train = x_train[0:trainSize]
 		y_train = y_train[0:trainSize]
-
-		#no need to change test length, because
-		#it is snot computationally expensive, and it gives bad
-		#accuracy readings if it changes every run	
-		# x_test = x_test[0:testSize]
-		# y_test = y_test[0:testSize]
 
 
 		Dataset.__init__(self, x_train, y_train, x_test, y_test)

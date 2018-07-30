@@ -2,7 +2,7 @@ import argparse
 import signal, sys
 import time
 
-from gmpract.console.parser import get_parser
+from gmpract.console.parser import get_args
 from gmpract.console.utilities import Spinner
 
 def main():
@@ -12,8 +12,7 @@ def main():
 	try:
 
 		#parse command inputs
-		parser = get_parser()
-		args = parser.parse_args()
+		args = get_args()
 
 		try: 
 			
@@ -36,50 +35,73 @@ def execute(args):
 	#import here so that we only import once we have proper inputs
 	#which makes its more efficient
 	from gmpract.data.MNISTDataset import MNISTDataset as mnist
-	from gmpract.classifiers.SVMClassifier import SVMClassifier as svm
 
+	#get MNIST data readydata ready
 	print('Importing MNIST dataset.')
 	mnistData = mnist(size_scale = args.data_size_scale)
+	#information about the training and test data sizes
 	trainSize = len(mnistData.trainDataX())
 	testSize = len(mnistData.testDataX())
 	print("Training Data Size  = " + str(trainSize))
 	print("Testing Data Size = " + str(testSize))
 
+	#based on args.which select what to do
 	if args.which == 'SVM':
+		run_svm_classifier(args, mnistData)
 
-		svmClassifier = svm(dataset = mnistData,
-		kernel_function = args.kernel_function,
-		loss_constant = args.loss_constant,
-		rand_seed_param = args.rand_seed_param,
-		verbose = args.verbose)
+'''
+Runs the svm classifier training and
+evaluation of performance. 
 
-		
-		print("""\nSVM model with:
-			Kernel Function = %s
-			Loss Constant = %f 
-			Random Seed Parameter = %i \n""" 
-			%(args.kernel_function, args.loss_constant, args.rand_seed_param))
+Parameters
+__________
 
-		print("Training model - may take a while!")
+@args - argparse arg object as given by
+		gmpract.console.parser Must be as outlined
+		by the arguments of the parser
 
-		#get the spinner going on terminal
-		spinner = Spinner()
-		spinner.start()
+prints to the console
+	-parameters passed
+	-time to train
+	-accuracy
 
-		t = time.time()
-		#train the model
-		svmClassifier.train()
-		elapsed = time.time() - t
+'''
+def run_svm_classifier(args, data):
+	from gmpract.classifiers.SVMClassifier import SVMClassifier as svm
 
-		spinner.stop()
-		del spinner
+	svmClassifier = svm(dataset = data,
+	kernel_function = args.kernel_function,
+	loss_constant = args.loss_constant,
+	rand_seed_param = args.rand_seed_param,
+	gamma = args.gamma,
+	verbose = args.verbose)
 
-		accuracy = svmClassifier.accuracy()
+	
+	print("""\nSVM model with:
+		Kernel Function = %s
+		Loss Constant = %f 
+		Random Seed Parameter = %s
+		Gamma = %s \n""" 
+		%(args.kernel_function, args.loss_constant, args.rand_seed_param, args.gamma))
 
-		print("\nTraining took %0.2f seconds" % elapsed)
-		print("Accuracy: %0.4f" % accuracy)
+	print("Training model - may take a while!")
 
+	#get the spinner going on terminal
+	spinner = Spinner()
+	spinner.start()
 
+	t = time.time()
+	#train the model
+	svmClassifier.train()
+	elapsed = time.time() - t
+
+	spinner.stop()
+	del spinner
+
+	accuracy = svmClassifier.accuracy()
+
+	print("\nTraining took %0.2f seconds" % elapsed)
+	print("Accuracy: %0.4f" % accuracy)
 
 def shutdown():
 	sys.exit(0)

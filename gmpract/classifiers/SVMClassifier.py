@@ -8,7 +8,7 @@ class SVMClassifier():
 	'''
 	Initializes the SVM classifier.
 	
-	REQUIRED PARAMETERS
+	 PARAMETERS
 	--------------------------------------------------------
 	@param dataset: gmpract.data object 
 
@@ -22,12 +22,10 @@ class SVMClassifier():
 
 	@param rand_seed_param: int - the random seed parameter for sklearn SVM model
 	
-	OPTIONAL PARAMETERS
-	-----------------------------------------------------
 	@gamma - float, sets the gamma coefficient 
-		- default is auto (1/n)
-
-	throws KeyError
+		- can either be a float or 'auto'
+	
+	@verbose - boolean, tells the classifier wether to print as it trains
 
 	'''
 	def __init__(self, **kwargs):
@@ -35,12 +33,13 @@ class SVMClassifier():
 		self.dataset = kwargs['dataset']
 
 		#initiate the classifer
-		self.classifier = SVC(probability=False,
+		self.classifier = SVC(
+			probability=False,
 			kernel = kwargs.get('kernel_function'),
 			C = kwargs.get('loss_constant'),
 			random_state = kwargs.get('rand_seed_param'),
-			gamma = kwargs.get('gamma','auto'),
-			verbose = kwargs.get('verbose',False)
+			gamma = kwargs.get('gamma'),
+			verbose = kwargs.get('verbose')
 			)
 
 	'''
@@ -48,11 +47,20 @@ class SVMClassifier():
 
 	Takes no parameters.
 
-	returns nothing prints nothing
+	returns nothing prints nothing, unless the classifier was initialized
+	with the verbose option, in which case sklearn will print iteration
+	reports
 	'''
 	def train(self):
 		self.classifier.fit(self.dataset.trainDataX(), self.dataset.trainDataY())
 
+	'''
+	The classifier must already have been trained or else it will raise an exception.
+
+	It will return the accuracy of the classifier as tested on the dataset's 
+	test data
+
+	'''
 	def accuracy(self):
 		predictions = self.classifier.predict(self.dataset.testDataX())
 		accuracy = metrics.accuracy_score(self.dataset.testDataY(), predictions)

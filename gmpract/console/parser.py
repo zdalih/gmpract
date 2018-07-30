@@ -1,6 +1,6 @@
 import argparse
 
-def get_parser():
+def get_args():
 	parser = argparse.ArgumentParser(description="""test accuracy of MNIST  
 	classifiers with variable inputs.""")
 
@@ -28,7 +28,16 @@ def get_parser():
 	subparsers = parser.add_subparsers(help='Classififer Model')
 	add_svm_subparser(subparsers)
 
-	return parser
+	args = parser.parse_args()
+
+	#TODO make this more elegant
+	#option: make gamma a class type
+	#so that argparse understands that it's
+	#default is a string and otherwise it's a float
+	if args.gamma == None:
+		args.gamma = 'auto'
+
+	return args
 
 def add_svm_subparser(subparsers):
 	svmParser = subparsers.add_parser('SVM',
@@ -40,27 +49,37 @@ def add_svm_subparser(subparsers):
 
 	svmParser.add_argument('-k',
 		'--kernelfunc',
-		required = True,
+		required = False,
+		default = 'linear',
 		choices = ['linear', 'poly', 'rbf', 'sigmoid'],
 		action = 'store',
 		dest = 'kernel_function',
-		help = 'Choose one of the SVM kernel functions.')
+		help = 'Choose one of the SVM kernel functions. [default = linear]')
 
 	svmParser.add_argument('-c',
 		'--penalconst',
-		required = True,
+		required = False,
+		default = 1,
 		type = float,
 		action = 'store',
 		dest = 'loss_constant',
-		help = 'Set the penalty "C" constant.')
+		help = 'Set the penalty "C" constant. [default = 1]')
 
 	svmParser.add_argument('-s',
 		'--randseedparam',
-		required = True,
+		required = False,
 		type = int,
 		action = 'store',
 		dest = 'rand_seed_param',
-		help = 'Set the random seed parameter')
+		help = 'Set the random seed parameter [default = None]')
+
+	svmParser.add_argument('-g',
+		'--gamma',
+		required = False,
+		type = float,
+		action = 'store',
+		dest = 'gamma',
+		help = 'Set the gamma constant. [default = auto]')
 
 
 '''
@@ -77,4 +96,3 @@ class Range:
 
 	def __repr__(self):
 		return ( 'Float Range : [%0.3f - %0.3f]' % (self.start, self.end) )
-
