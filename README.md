@@ -139,3 +139,10 @@ Example to use the SVM model with 10% of the MNIST dataset. Setting the loss pen
 ```
 gmpract -d 0.1 SVM -run --kernel rbf -c 1e6 -s 0
 ```
+
+Another example, this time gamma is being set to 5 and verbose is on: 
+
+
+```
+gmpract -v -d 0.1 SVM -run --kernel linear -c 1e6 -s 0 -g 5
+```
