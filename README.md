@@ -104,10 +104,24 @@ gmpract -h
 
 Selects the SVM model for training. Implemented using sklearn SVC's module. 
 
-#### -k, --kernel
+#### -k, --kernel [KERNEL_FUNCTION] - Choose one of the kernel functions [default = linear]
 
-#### -c, --penalconstant
+Choices are: {linear, rbf, poly, sigmoid}
 
-#### -s, --randseedparam
+#### -c, --penalconstant [LOSS_PENALTY_CONSTANT] - Set the C constant - a float [default = 1]
 
-#### -g, --gamma
+Any float.
+
+#### -s, --randseedparam - The seed for the random generator - int [default = None]
+
+The default value is None meaning the model will not be using the random generator. 
+
+#### -g, --gamma - Set gamma - float [default = auto]
+
+If not set, it will be auto or 1/n where n is the training size. 
+
+Exemple to use the SVM model with 10% of the MNIST dataset. Setting the loss penalty constant to 1e6, using the rbf kernel function, allowing gamma to be auto, and seeting the random seed parameter to 1:
+
+```
+gmpract -d 0.1 SVM run --kernel rbf -c 1e6 -s 0
+```
