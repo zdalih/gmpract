@@ -34,7 +34,7 @@ sudo sh ./install.sh
 
 Try ```gmpract -h```, if you get a help message you are good to go.
 
-## Option 2 : Use Python Script [Faster]
+## Option 2 : Use Python Script [Better Performance, less stable]
 
 Requirements:
 * Python >= 3.5
