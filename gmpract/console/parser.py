@@ -1,6 +1,36 @@
+''''
+The parser creator for gmpract. This handles all
+the logic, subparsers, and options that will
+generate the args (parameters) that will run
+the tool.
+
+Author: Mohamed-Ali Hached
+e-mail: mdali.hached@gmail.com
+'''
+
+
+
 import argparse
 
+'''
+Returns the arguments (parameters) as read by argparse
+
+has the following subparsers:
+	-SVM
+
+the subparser used by the user is outlined by args.which, one
+of the subparsers must be chosen else the parser will let the
+user know of the possible positional arguments.
+
+args is only returned if the parser finds that the user has
+proivded arguments that satisfy what is outlined by the
+setup of the parser and the subparser. else it will direct 
+the user to a informative message printed on __stdout__
+'''
+
 def get_args():
+	#THE PARSER ITSELF:
+
 	parser = argparse.ArgumentParser(description="""test accuracy of MNIST  
 	classifiers with variable inputs.""")
 
@@ -24,10 +54,11 @@ def get_args():
 	dest = 'data_size_scale',
 	help = 'Number between 0.001-1.0 referring the the percent of the MNIST database to train on.')
 
-	#add a subparser for each model supported
+	#ADD ANY SUBPARSER FOR SUB-MODELS
 	subparsers = parser.add_subparsers(help='Classififer Model')
 	add_svm_subparser(subparsers)
 
+	#GET THE ARGUMENTS
 	args = parser.parse_args()
 
 	#TODO make this more elegant
@@ -42,13 +73,23 @@ def get_args():
 
 	return args
 
+'''
+Subparser for the SVM positional argument,
+it parses the inputs that only apply to the SVM 
+classifier model
+'''
 def add_svm_subparser(subparsers):
 	svmParser = subparsers.add_parser('SVM',
 		help = 'Use SVM Model.')
 	svmParser.set_defaults(which='SVM')
 
-	#the following are required params
-	#type as per sklearn documentation
+	#the parameters for the SVM tool
+
+	svmParser.add_argument('-run',
+		required = True,
+		action = 'store_true',
+		help = 'Start the process.'
+		)
 
 	svmParser.add_argument('-k',
 		'--kernelfunc',
