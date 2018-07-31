@@ -102,7 +102,11 @@ gmpract -h
 
 ### Model: Support Vector Machine {SVM}
 
-Selects the SVM model for training. Implemented using sklearn SVC's module. To get some help 
+Selects the SVM model for training. Implemented using sklearn SVC's module. To print the SVM classifier sub-process's help:
+
+```
+gmpract SVM -h
+```
 
 ### -run [RUN_PROCESS] - Tells us to run the SVM classifier. REQUIRED!
 
@@ -123,6 +127,10 @@ The default value is None meaning the model will not be using the random generat
 #### -g, --gamma - Set gamma - float [default = auto]
 
 If not set, it will be auto or 1/n where n is the training size. 
+
+#### -h, --help - Print help prompt
+
+---------------
 
 Example to use the SVM model with 10% of the MNIST dataset. Setting the loss penalty constant to 1e6, using the rbf kernel function, allowing gamma to be auto, and seeting the random seed parameter to 1:
 
