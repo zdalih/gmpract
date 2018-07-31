@@ -30,7 +30,6 @@ Now run the install script.
 
 ```
 sudo sh ./install.sh
-alias gmpract='sudo /bin/gmpract.sh'
 ```
 
 Try ```gmpract -h```, if you get a help message you are good to go.
@@ -68,6 +67,9 @@ You are now in a position to run ```python3 main.py -h``` to see if you can succ
 ```
 alias gmpract=$'python3 '$(pwd)$'/main.py'
 ```
+
+try gmpract -h, if the help prompt prints out you are good!
+
 # Usage
 
 The gmpract tool allows one to use the MNIST dataset to train a chosen classifier model and evaluate it's accuracy and training time. 
