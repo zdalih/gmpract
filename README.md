@@ -81,7 +81,7 @@ Example - run default SVM model with half of the mnist dataset
 gmpract -d 0.5 SVM -run
 ```
 
-#### -v, --verbose [VERBOSITY] - Boolean flag to allow/disallow verbose printing while training. [default = False]
+#### -v, --verbose - Sets verbose if option is present.
 
 Allows sklearn module to print while it is training.
 
@@ -91,7 +91,7 @@ Examle - run default SVM model with all of the mnist dataset, while verbose.
 gmpract -v SVM -run
 ```
 
-#### -h, --help [HELP] - Prints help prompt
+#### -h, --help - Prints help prompt
 
 Prints help prompt for the current parser.
 
@@ -108,7 +108,7 @@ Selects the SVM model for training. Implemented using sklearn SVC's module. To p
 gmpract SVM -h
 ```
 
-### -run [RUN_PROCESS] - Tells us to run the SVM classifier. REQUIRED!
+### -run - Tells us to run the SVM classifier. REQUIRED!
 
 Must be set to run the tool.
 
@@ -120,11 +120,11 @@ Choices are: {linear, rbf, poly, sigmoid}
 
 Any float.
 
-#### -s, --randseedparam - The seed for the random generator - int [default = None]
+#### -s, --randseedparam [SEED] - The seed for the random generator - int [default = None]
 
 The default value is None meaning the model will not be using the random generator. 
 
-#### -g, --gamma - Set gamma - float [default = auto]
+#### -g, --gamma - Set gamma [GAMMA] - float [default = auto]
 
 If not set, it will be auto or 1/n where n is the training size. 
 
