@@ -45,7 +45,11 @@ def execute(args):
 	#based on args.which select what to do
 	if args.which == 'SVM':
 		from gmpract.console.routines import run_svm_classifier
-		run_svm_classifier(args, mnistData)
+
+		if args.verbose:
+			run_svm_classifier(args, mnistData, spin = False)
+		else:
+			run_svm_classifier(args, mnistData)
 
 def shutdown():
 	sys.exit(0)

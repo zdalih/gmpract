@@ -58,6 +58,11 @@ __________
 @data - the MNISTDataset object with the training and
 	testing dataset that will be used by the classifier
 
+@spin - boolean letting the tool know wether to print
+	a spinning wheel. But user must beware that this
+	starts a new thread and this can be problematic as 
+	python does not handle signals well when multi-threading
+
 prints to __stdout__
 	-Parameters used for the SVM classifier
 	-Spinning Wheel
@@ -65,7 +70,7 @@ prints to __stdout__
 	-Accuracy
 
 '''
-def run_svm_classifier(args, data):
+def run_svm_classifier(args, data, spin = True):
 	from gmpract.classifiers.SVMClassifier import SVMClassifier as svm
 	from gmpract.console.utilities import Spinner
 	import time
@@ -88,16 +93,18 @@ def run_svm_classifier(args, data):
 	print("Training model - may take a while!")
 
 	#get the spinner going on terminal
-	spinner = Spinner()
-	spinner.start()
+	if spin:
+		spinner = Spinner()
+		spinner.start()
 
 	t = time.time()
 	#train the model
 	svmClassifier.train()
 	elapsed = time.time() - t
 
-	spinner.stop()
-	del spinner
+	if spin:
+		spinner.stop()
+		del spinner
 
 	accuracy = svmClassifier.accuracy()
 
