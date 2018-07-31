@@ -68,7 +68,7 @@ You are now in a position to run ```python3 main.py -h``` to see if you can succ
 alias gmpract=$'python3 '$(pwd)$'/main.py'
 ```
 
-try gmpract -h, if the help prompt prints out you are good!
+try ```gmpract -h```, if the help prompt prints out you are good!
 
 # Usage
 
