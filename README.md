@@ -22,7 +22,7 @@ With docker installed, use git to clone the repo and move into the gmpract/bin f
 
 ```
 sudo apt-get install git
-git clone https://github.ubc.ca/dalihach/gmpract.git
+git clone https://github.com/zdalih/gmpract.git
 cd gmpract/bin
 ```
 
@@ -52,7 +52,7 @@ Clone the repo and move into the directory:
 
 
 ```
-git clone https://github.ubc.ca/dalihach/gmpract.git
+git clone https://github.com/zdalih/gmpract.git
 cd gmpract
 ```
 
