@@ -78,7 +78,7 @@ One can choose the percent of the MNIST training dataset to use (55,000 training
 
 Example - run default SVM model with half of the mnist dataset
 ```
-gmpract -d 0.5 SVM run
+gmpract -d 0.5 SVM -run
 ```
 
 #### -v, --verbose [VERBOSITY] - Boolean flag to allow/disallow verbose printing while training. [default = False]
@@ -88,7 +88,7 @@ Allows sklearn module to print while it is training.
 Examle - run default SVM model with all of the mnist dataset, while verbose.
 
 ```
-gmpract -v SVM run
+gmpract -v SVM -run
 ```
 
 #### -h, --help [HELP] - Prints help prompt
@@ -102,7 +102,11 @@ gmpract -h
 
 ### Model: Support Vector Machine {SVM}
 
-Selects the SVM model for training. Implemented using sklearn SVC's module. 
+Selects the SVM model for training. Implemented using sklearn SVC's module. To get some help 
+
+### -run [RUN_PROCESS] - Tells us to run the SVM classifier. REQUIRED!
+
+Must be set to run the tool.
 
 #### -k, --kernel [KERNEL_FUNCTION] - Choose one of the kernel functions [default = linear]
 
@@ -120,8 +124,8 @@ The default value is None meaning the model will not be using the random generat
 
 If not set, it will be auto or 1/n where n is the training size. 
 
-Exemple to use the SVM model with 10% of the MNIST dataset. Setting the loss penalty constant to 1e6, using the rbf kernel function, allowing gamma to be auto, and seeting the random seed parameter to 1:
+Example to use the SVM model with 10% of the MNIST dataset. Setting the loss penalty constant to 1e6, using the rbf kernel function, allowing gamma to be auto, and seeting the random seed parameter to 1:
 
 ```
-gmpract -d 0.1 SVM run --kernel rbf -c 1e6 -s 0
+gmpract -d 0.1 SVM -run --kernel rbf -c 1e6 -s 0
 ```
