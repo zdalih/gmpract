@@ -72,11 +72,21 @@ alias gmpract=$'python3 '$(pwd)$'/main.py'
 
 The gmpract tool allows one to use the MNIST dataset to train a chosen classifier model and evaluate it's accuracy and training time. 
 
-### -d [PORTION_DATASET] - Scale the size of the training dataset. A float between 0.001 and 1.
+### -d [PORTION_DATASET] - Scale the size of the training dataset. A float between 0.001 and 1. [default = 1]
 
 One can choose the percent of the MNIST training dataset to use (51000 training images) in order to circumvent the long training times. The -d option set's the training data scale parameter, it is the percent of the total data to use for training.
 
 Example - run default SVM model with half of the mnist dataset
 ```
 gmpract -d 0.5 SVM run
+```
+
+### -v, --verbose [VERBOSITY] - Boolean flag to allow/disallow verbose printing while training. [default = False]
+
+Allows sklearn module to print while it is training.
+
+Examle - run default SVM model with all of the mnist dataset, while verbose.
+
+```
+gmpract -v SVM run
 ```
