@@ -110,7 +110,7 @@ Selects the SVM model for training. Implemented using sklearn SVC's module. To p
 gmpract SVM -h
 ```
 
-### -run - Tells us to run the SVM classifier. REQUIRED!
+#### -run - Tells us to run the SVM classifier. REQUIRED!
 
 Must be set to run the tool.
 
