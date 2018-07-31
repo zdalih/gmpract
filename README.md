@@ -6,8 +6,8 @@ Command line tool that takes SVM kernel, penalty constant, and random seed param
 ## Option 1 : Docker Image [Recomended]
 
 Requirements:
-*Docker Installed
-*Linux Distribution
+* Docker Installed
+* Linux Distribution
 
 If you do not have Docker installed you can either follow Docker's instruction for your distribution: https://docs.docker.com/install/#general-availability. Or use the following install script:
 
@@ -38,8 +38,8 @@ Try ```gmpract -h```, if you get a help message you are good to go.
 ## Option 2 : Use Python Script [Faster]
 
 Requirements:
-*Python >= 3.5
-*Linux Distribution
+* Python >= 3.5
+* Linux Distribution
 
 Ensure Python >= 3.5 and git is installed on your machine. 
 
