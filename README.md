@@ -93,4 +93,21 @@ gmpract -v SVM run
 
 #### -h, --help [HELP] - Prints help prompt
 
-### SVM
+Prints help prompt for the current parser.
+
+Exemple: will print the available options for the tools
+```
+gmpract -h
+```
+
+### Model: Support Vector Machine {SVM}
+
+Selects the SVM model for training. Implemented using sklearn SVC's module. 
+
+#### -k, --kernel
+
+#### -c, --penalconstant
+
+#### -s, --randseedparam
+
+#### -g, --gamma
